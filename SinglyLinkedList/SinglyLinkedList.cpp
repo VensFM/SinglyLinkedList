@@ -128,6 +128,7 @@ SinglyLinkedList getIntersection(const SinglyLinkedList& list1, const SinglyLink
 			if (temp1->item_ == temp2->item_)
 			{
 				res.insert(temp1->item_);
+				break;
 			}
 			temp2 = temp2->next_;
 		}

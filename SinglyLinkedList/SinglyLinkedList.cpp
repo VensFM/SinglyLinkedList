@@ -85,7 +85,7 @@ void SinglyLinkedList::merge(SinglyLinkedList& list)
 	while (list.head_ != nullptr)
 	{
 		Node* buf = list.head_->next_;
-		Node* temp = head_;
+		list.head_->next_ = nullptr;
 		if (insertNode(list.head_))
 		{
 			list.head_ = buf;
@@ -185,6 +185,11 @@ std::ostream& operator<<(std::ostream& out, const SinglyLinkedList& list)
 
 bool SinglyLinkedList::insertNode(Node* newNode)
 {
+	if (newNode == nullptr)
+	{
+		std::cerr << "	Node is empty!!!";
+		return false;
+	}
 	if (head_ == nullptr)
 	{
 		head_ = newNode;

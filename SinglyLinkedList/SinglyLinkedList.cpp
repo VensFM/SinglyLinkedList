@@ -1,11 +1,14 @@
 #include "SinglyLinkedList.h"
 
-SinglyLinkedList::SinglyLinkedList()
+
+template <typename T>
+SinglyLinkedList<T>::SinglyLinkedList()
 {
 	head_ = nullptr;
 }
 
-SinglyLinkedList::SinglyLinkedList(const SinglyLinkedList& list)noexcept
+template <typename T>
+SinglyLinkedList<T>::SinglyLinkedList(const SinglyLinkedList<T>& list)noexcept
 {
 	this->head_ = nullptr;
 	Node* next = list.head_;
@@ -17,13 +20,15 @@ SinglyLinkedList::SinglyLinkedList(const SinglyLinkedList& list)noexcept
 	}
 }
 
-SinglyLinkedList::SinglyLinkedList(SinglyLinkedList&& list)noexcept
+template <typename T>
+SinglyLinkedList<T>::SinglyLinkedList(SinglyLinkedList<T>&& list)noexcept
 {
 	this->head_ = list.head_;
 	list.head_ = nullptr;
 }
 
-SinglyLinkedList::~SinglyLinkedList()
+template <typename T>
+SinglyLinkedList<T>::~SinglyLinkedList()
 {
 	Node* buf = nullptr;
 	Node* next = head_;
@@ -35,7 +40,8 @@ SinglyLinkedList::~SinglyLinkedList()
 	}
 }
 
-bool SinglyLinkedList::insert(int x)
+template <typename T>
+bool SinglyLinkedList<T>::insert(T x)
 {
 	Node* temp = new Node(x);
 	if (insertNode(temp))
@@ -46,7 +52,8 @@ bool SinglyLinkedList::insert(int x)
 	return false;
 }
 
-bool SinglyLinkedList::search(int x)const
+template <typename T>
+bool SinglyLinkedList<T>::search(T x)const
 {
 	if (searchNode(x) == nullptr)
 	{
@@ -56,7 +63,8 @@ bool SinglyLinkedList::search(int x)const
 	return true;
 }
 
-bool SinglyLinkedList::remove(int x)
+template <typename T>
+bool SinglyLinkedList<T>::remove(T x)
 {
 	Node* needToDel = searchNode(x);
 	if (needToDel == nullptr)
@@ -80,7 +88,8 @@ bool SinglyLinkedList::remove(int x)
 	return true;
 }
 
-void SinglyLinkedList::merge(SinglyLinkedList& list)
+template <typename T>
+void SinglyLinkedList<T>::merge(SinglyLinkedList<T>& list)
 {
 	while (list.head_ != nullptr)
 	{
@@ -96,7 +105,8 @@ void SinglyLinkedList::merge(SinglyLinkedList& list)
 	}
 }
 
-void SinglyLinkedList::remove(const SinglyLinkedList& list)
+template <typename T>
+void SinglyLinkedList<T>::remove(const SinglyLinkedList<T>& list)
 {
 	if (list.head_ == nullptr || head_ == nullptr)
 	{
@@ -111,34 +121,36 @@ void SinglyLinkedList::remove(const SinglyLinkedList& list)
 	}
 }
 
-SinglyLinkedList getIntersection(const SinglyLinkedList& list1, const SinglyLinkedList& list2)
-{
-	SinglyLinkedList res;
-	if (list1.head_ == nullptr|| list2.head_ == nullptr)
-	{
-		std::cerr << "\n	One of the lists is empty!!!\n";
-		return res;
-	}
-	SinglyLinkedList::Node* temp1 = list1.head_;
-	while (temp1 != nullptr)
-	{
-		SinglyLinkedList::Node* temp2 = list2.head_;
-		while (temp2 != nullptr)
-		{
-			if (temp1->item_ == temp2->item_)
-			{
-				res.insert(temp1->item_);
-				break;
-			}
-			temp2 = temp2->next_;
-		}
-		temp1 = temp1->next_;
-	}
-	return res;
-}
+//template <typename T>
+//SinglyLinkedList<T> getIntersection(const SinglyLinkedList<T>& list1, const SinglyLinkedList<T>& list2)
+//{
+//	SinglyLinkedList<T> res;
+//	if (list1.head_ == nullptr|| list2.head_ == nullptr)
+//	{
+//		std::cerr << "\n	One of the lists is empty!!!\n";
+//		return res;
+//	}
+//	SinglyLinkedList<T>::template Node* temp1 = list1.head_;
+//	while (temp1 != nullptr)
+//	{
+//		SinglyLinkedList<T>::template Node* temp2 = list2.head_;
+//		while (temp2 != nullptr)
+//		{
+//			if (temp1->item_ == temp2->item_)
+//			{
+//				res.insert(temp1->item_);
+//				break;
+//			}
+//			temp2 = temp2->next_;
+//		}
+//		temp1 = temp1->next_;
+//	}
+//	return res;
+//}
 
 
-SinglyLinkedList& SinglyLinkedList::operator = (const SinglyLinkedList& list)
+template <typename T>
+SinglyLinkedList<T>& SinglyLinkedList<T>::operator = (const SinglyLinkedList<T>& list)
 {
 	Node* buf = nullptr;
 	Node* next = head_;
@@ -159,7 +171,8 @@ SinglyLinkedList& SinglyLinkedList::operator = (const SinglyLinkedList& list)
 	return *this;
 }
 
-SinglyLinkedList& SinglyLinkedList::operator = (SinglyLinkedList&& list)noexcept
+template <typename T>
+SinglyLinkedList<T>& SinglyLinkedList<T>::operator = (SinglyLinkedList<T>&& list)noexcept
 {
 	if (this->head_ != list.head_)
 	{
@@ -169,22 +182,24 @@ SinglyLinkedList& SinglyLinkedList::operator = (SinglyLinkedList&& list)noexcept
 	return *this;
 }
 
-std::ostream& operator<<(std::ostream& out, const SinglyLinkedList& list)
-{
-	if (list.head_ == nullptr)
-	{
-		out << "The list is empty";
-	}
-	SinglyLinkedList::Node* temp = list.head_;
-	while (temp != nullptr)
-	{
-		out << temp->item_ << " ";
-		temp = temp->next_;
-	}
-	return out;
-}
+//template <typename T>
+//std::ostream& operator<<(std::ostream& out, const SinglyLinkedList<T>& list)
+//{
+//	if (list.head_ == nullptr)
+//	{
+//		out << "The list is empty";
+//	}
+//	SinglyLinkedList<T>::template Node* temp = list.head_;
+//	while (temp != nullptr)
+//	{
+//		out << temp->item_ << " ";
+//		temp = temp->next_;
+//	}
+//	return out;
+//}
 
-bool SinglyLinkedList::insertNode(Node* newNode)
+template <typename T>
+bool SinglyLinkedList<T>::insertNode(Node* newNode)
 {
 	if (newNode == nullptr)
 	{
@@ -225,7 +240,8 @@ bool SinglyLinkedList::insertNode(Node* newNode)
 	return true;
 }
 
-SinglyLinkedList::Node* SinglyLinkedList::searchNode(int x)const
+template <typename T>
+SinglyLinkedList<T>:: template Node* SinglyLinkedList<T>::searchNode(T x)const
 {
 	Node* temp = head_;
 	while (temp != nullptr)

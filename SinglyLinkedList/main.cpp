@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 #include "SinglyLinkedList.h"
 #include "SinglyLinkedList.cpp"
@@ -7,6 +8,7 @@ void constructorsTest();
 void basicMethodTest();
 void complexMethodsTest();
 void assignmentOperatorTest();
+void templateTest();
 
 int main()
 {
@@ -14,6 +16,7 @@ int main()
 	basicMethodTest();
 	complexMethodsTest();
 	assignmentOperatorTest();
+	templateTest();
 	return 0;
 }
 
@@ -114,6 +117,54 @@ void assignmentOperatorTest()
 	std::cout << "	Move assignment:\nBefore:\n List1: " << list1 << "\n List2: " << list2 << "\n\nAfter assignment:\n";
 	list1 = std::move(list2);
 	std::cout << " List1: " << list1 << "\n List2: " << list2 << "\n\n";
+	system("pause");
+	system("cls");
+}
+
+void templateTest()
+{
+	system("cls");
+	std::cout << "	Singly linked list: templates test\n\n";
+	SinglyLinkedList<int> list1, list2;
+	SinglyLinkedList<float> list3, list4;
+	SinglyLinkedList<char> list5, list6;
+	SinglyLinkedList<std::string> list7, list8;
+	list1.insert(1);
+	list1.insert(2);
+	list1.insert(3);
+	list2.insert(4);
+	list2.insert(5);
+	list2.insert(6);
+	std::cout << "	Method merge<int>:\nBefore:\n List1: " << list1 << "\n List2: " << list2 << "\n\nAfter merge:\n";
+	list1.merge(list2);
+	std::cout << " List1: " << list1 << "\n List2: " << list2 << "\n\n\n";
+	list3.insert(1.1);
+	list3.insert(2.1);
+	list3.insert(3.1);
+	list4.insert(4.1);
+	list4.insert(5.1);
+	list4.insert(6.1);
+	std::cout << "	Method merge<float>:\nBefore:\n List1: " << list3 << "\n List2: " << list4 << "\n\nAfter merge:\n";
+	list3.merge(list4);
+	std::cout << " List1: " << list3 << "\n List2: " << list4 << "\n\n\n";
+	list5.insert('a');
+	list5.insert('c');
+	list5.insert('b');
+	list6.insert('d');
+	list6.insert('f');
+	list6.insert('e');
+	std::cout << "	Method merge<char>:\nBefore:\n List1: " << list5 << "\n List2: " << list6 << "\n\nAfter merge:\n";
+	list5.merge(list6);
+	std::cout << " List1: " << list5 << "\n List2: " << list6 << "\n\n\n";
+	list7.insert("a");
+	list7.insert("abc");
+	list7.insert("ab");
+	list8.insert("b");
+	list8.insert("bcd");
+	list8.insert("bc");
+	std::cout << "	Method merge<string>:\nBefore:\n List1: " << list7 << "\n List2: " << list8 << "\n\nAfter merge:\n";
+	list7.merge(list8);
+	std::cout << " List1: " << list7 << "\n List2: " << list8 << "\n\n";
 	system("pause");
 	system("cls");
 }

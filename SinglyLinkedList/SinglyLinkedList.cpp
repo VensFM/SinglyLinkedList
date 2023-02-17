@@ -152,13 +152,16 @@ void SinglyLinkedList<T>::remove(const SinglyLinkedList<T>& list)
 template <typename T>
 SinglyLinkedList<T>& SinglyLinkedList<T>::operator = (const SinglyLinkedList<T>& list)
 {
-	Node* buf = nullptr;
 	Node* next = head_;
-	while (next != nullptr)
+	if (this->head_ != nullptr)
 	{
-		buf = next;
-		next = next->next_;
-		delete buf;
+		Node* buf = nullptr;
+		while (next != nullptr)
+		{
+			buf = next;
+			next = next->next_;
+			delete buf;
+		}
 	}
 	this->head_ = nullptr;
 	next = list.head_;
@@ -176,6 +179,17 @@ SinglyLinkedList<T>& SinglyLinkedList<T>::operator = (SinglyLinkedList<T>&& list
 {
 	if (this->head_ != list.head_)
 	{
+		if (this->head_ != nullptr)
+		{
+			Node* buf = nullptr;
+			Node* next = head_;
+			while (next != nullptr)
+			{
+				buf = next;
+				next = next->next_;
+				delete buf;
+			}
+		}
 		this->head_ = list.head_;
 		list.head_ = nullptr;
 	}
